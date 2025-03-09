@@ -8,6 +8,10 @@ This is a `Cucumber BDD` framework.
 
 ## To run all tests:
 
+`./run-tests.sh`
+
+or alternatively
+
 `mvn test -Dcucumber.options="--tags @regression"`
 
 ## To run a particular test scenario:
