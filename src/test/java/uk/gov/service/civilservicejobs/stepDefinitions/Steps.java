@@ -4,6 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import uk.gov.service.civilservicejobs.pages.CivilServiceJobSearchPage;
 import uk.gov.service.civilservicejobs.pages.QuickCheckNeededPage;
 import uk.gov.service.civilservicejobs.pages.SearchResultsPage;
@@ -36,12 +37,15 @@ public class Steps {
     }
 
     @When("user filters {string}")
-    public void user_filters(String filter) {
+    public void user_filters(String filter) throws InterruptedException {
         System.out.println(filter);
-//        new SearchResultsPage().department.click();
-//        val button = Driver.get().find_element("css selector", "button.oselect__title.oselect__button.js-container-button[id='oselect_title_4fd8']")
-//        button.click()
+        JavascriptExecutor js = (JavascriptExecutor) Driver.get();
+        js.executeScript("window.scrollBy(0,300);");        new SearchResultsPage().department.click();
         BrowserUtils.waitForPageToLoad(5);
-        BrowserUtils.waitFor(5);
+        new SearchResultsPage().department.click();
+        new SearchResultsPage().department.click();
+        new SearchResultsPage().department.click();
+
+
     }
 }

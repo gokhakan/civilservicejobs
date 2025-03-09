@@ -22,9 +22,6 @@ public class CivilServiceJobSearchPage {
     @FindBy(id = "submitSearch")
     public WebElement submitSearch;
 
-
-
-
     public void acceptAllCookies() {
         acceptAllCookiesButton.click();
     }

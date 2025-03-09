@@ -12,7 +12,7 @@ public class SearchResultsPage {
     @FindBy(id = "id_common_page_title_h1")
     public WebElement resultsTitle;
 
-    @FindBy(className = "oselect__heading")
+    @FindBy(xpath = "//button[contains(text(), 'Department')]")
     public WebElement department;
 
 }
