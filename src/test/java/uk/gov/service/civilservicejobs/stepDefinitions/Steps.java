@@ -3,8 +3,6 @@ package uk.gov.service.civilservicejobs.stepDefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
-import org.openqa.selenium.JavascriptExecutor;
 import uk.gov.service.civilservicejobs.pages.CivilServiceJobSearchPage;
 import uk.gov.service.civilservicejobs.pages.QuickCheckNeededPage;
 import uk.gov.service.civilservicejobs.pages.SearchResultsPage;
@@ -13,12 +11,11 @@ import uk.gov.service.civilservicejobs.utilities.ConfigurationReader;
 import uk.gov.service.civilservicejobs.utilities.Driver;
 
 import static org.junit.Assert.assertEquals;
-import static uk.gov.service.civilservicejobs.utilities.Driver.driver;
 
 public class Steps {
     @Given("user is on search page")
     public void user_is_on_search_page() throws InterruptedException {
-        driver.get(ConfigurationReader.get("url"));
+        Driver.get().get(ConfigurationReader.get("url"));
         new QuickCheckNeededPage().clickAndContinueCaptcha();
         assertEquals( "Civil Service job search - Civil Service Jobs - GOV.UK", Driver.get().getTitle());
         new CivilServiceJobSearchPage().acceptAllCookies();
@@ -38,14 +35,10 @@ public class Steps {
     }
 
     @When("user filters {string}")
-    public void user_filters(String filter) throws InterruptedException {
+    public void user_filters(String filter){
         System.out.println(filter);
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,300);");
         new SearchResultsPage().department.click();
         BrowserUtils.waitForPageToLoad(5);
         new SearchResultsPage().department.click();
-
-
     }
 }
