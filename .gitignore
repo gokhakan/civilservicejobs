@@ -36,3 +36,9 @@ build/
 
 ### Mac OS ###
 .DS_Store
+/codeStyleConfig.xml
+/encodings.xml
+misc.xml
+Project.xml
+uiDesigner.xml
+vcs.xml
