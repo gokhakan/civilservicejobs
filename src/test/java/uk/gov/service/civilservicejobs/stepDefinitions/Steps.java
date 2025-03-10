@@ -13,11 +13,12 @@ import uk.gov.service.civilservicejobs.utilities.ConfigurationReader;
 import uk.gov.service.civilservicejobs.utilities.Driver;
 
 import static org.junit.Assert.assertEquals;
+import static uk.gov.service.civilservicejobs.utilities.Driver.driver;
 
 public class Steps {
     @Given("user is on search page")
     public void user_is_on_search_page() throws InterruptedException {
-        Driver.get().get(ConfigurationReader.get("url"));
+        driver.get(ConfigurationReader.get("url"));
         new QuickCheckNeededPage().clickAndContinueCaptcha();
         assertEquals( "Civil Service job search - Civil Service Jobs - GOV.UK", Driver.get().getTitle());
         new CivilServiceJobSearchPage().acceptAllCookies();
@@ -39,11 +40,10 @@ public class Steps {
     @When("user filters {string}")
     public void user_filters(String filter) throws InterruptedException {
         System.out.println(filter);
-        JavascriptExecutor js = (JavascriptExecutor) Driver.get();
-        js.executeScript("window.scrollBy(0,300);");        new SearchResultsPage().department.click();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,300);");
+        new SearchResultsPage().department.click();
         BrowserUtils.waitForPageToLoad(5);
-        new SearchResultsPage().department.click();
-        new SearchResultsPage().department.click();
         new SearchResultsPage().department.click();
 
 
