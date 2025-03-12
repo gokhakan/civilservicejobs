@@ -14,6 +14,16 @@ or alternatively
 
 `mvn test -Dcucumber.options="--tags @regression"`
 
+## To run all tests in headless-chrome:
+
+`./run-tests.sh headless`
+
+or alternatively
+
+` mvn test -Dcucumber.filter.tags="@regression" -Dheadless=true`
+
+
+
 ## To run a particular test scenario:
 Tag the scenario with `@<tag name>` and run:
 

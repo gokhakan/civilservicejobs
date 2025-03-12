@@ -13,33 +13,39 @@ import org.openqa.selenium.safari.SafariDriver;
 
 public class Driver {
     private Driver() {
-
     }
 
-    public static WebDriver driver;
+    private static WebDriver driver;
 
     public static WebDriver get() {
-        // Test
         if (driver == null) {
-            // this line will tell which browser should open based on the value from properties file
-            String browser = ConfigurationReader.get("browser");
+            // Get browser type from properties file
+            String browser = ConfigurationReader.get("browser").toLowerCase();
+
+            // Check if headless mode is enabled via Maven parameter (-Dheadless=true)
+            boolean isHeadless = Boolean.parseBoolean(System.getProperty("headless", "false"));
+
             switch (browser) {
                 case "chrome":
-                    WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver();
-                    break;
                 case "chrome-headless":
                     WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver(new ChromeOptions().setHeadless(true));
+                    ChromeOptions chromeOptions = new ChromeOptions();
+                    if (isHeadless || browser.equals("chrome-headless")) {
+                        chromeOptions.addArguments("--headless", "--disable-gpu", "--window-size=1920,1080");
+                    }
+                    driver = new ChromeDriver(chromeOptions);
                     break;
+
                 case "firefox":
-                    WebDriverManager.firefoxdriver().setup();
-                    driver = new FirefoxDriver();
-                    break;
                 case "firefox-headless":
                     WebDriverManager.firefoxdriver().setup();
-                    driver = new FirefoxDriver(new FirefoxOptions().setHeadless(true));
+                    FirefoxOptions firefoxOptions = new FirefoxOptions();
+                    if (isHeadless || browser.equals("firefox-headless")) {
+                        firefoxOptions.setHeadless(true);
+                    }
+                    driver = new FirefoxDriver(firefoxOptions);
                     break;
+
                 case "ie":
                     if (!System.getProperty("os.name").toLowerCase().contains("windows"))
                         throw new WebDriverException("Your OS doesn't support Internet Explorer");
@@ -57,11 +63,13 @@ public class Driver {
                 case "safari":
                     if (!System.getProperty("os.name").toLowerCase().contains("mac"))
                         throw new WebDriverException("Your OS doesn't support Safari");
-                    WebDriverManager.getInstance(SafariDriver.class).setup();
+                    WebDriverManager.safaridriver().setup();
                     driver = new SafariDriver();
                     break;
-            }
 
+                default:
+                    throw new WebDriverException("Invalid browser: " + browser);
+            }
         }
 
         return driver;
