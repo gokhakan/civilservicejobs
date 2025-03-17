@@ -15,4 +15,13 @@ public class SearchResultsPage {
     @FindBy(xpath = "//button[contains(text(), 'Department')]")
     public WebElement department;
 
+    @FindBy(xpath = "//button[contains(text(), 'Department')]//following::input")
+    public WebElement searchBox;
+
+    @FindBy(xpath = "//input[@aria-label='Medicines and Healthcare Products Regulatory Agency']")
+    public WebElement medicines;
+
+    //input[@name='update_button']
+    @FindBy(xpath = "//input[@name='update_button']")
+    public WebElement updateResult;
 }

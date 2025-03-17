@@ -35,10 +35,17 @@ public class Steps {
     }
 
     @When("user filters {string}")
-    public void user_filters(String filter){
-        System.out.println(filter);
+    public void user_filters(String filter) {
         new SearchResultsPage().department.click();
         BrowserUtils.waitForPageToLoad(5);
         new SearchResultsPage().department.click();
+        BrowserUtils.waitForPageToLoad(5);
+        new SearchResultsPage().department.click();
+        new SearchResultsPage().searchBox.click();
+        BrowserUtils.waitForPageToLoad(5);
+        new SearchResultsPage().searchBox.sendKeys(filter);
+        BrowserUtils.waitForPageToLoad(5);
+        new SearchResultsPage().medicines.click();
+        new SearchResultsPage().updateResult.click();
     }
 }

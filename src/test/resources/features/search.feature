@@ -12,5 +12,7 @@ Feature: [1] Validate the search results to ensure relevant job listings appear
   Scenario: [1.2] Apply filter options
     When user searches for "Analyst" in "London"
     And user filters "Medicines and Healthcare products Regulatory Agency"
+    Then "1" search results should be displayed
+
 
 
