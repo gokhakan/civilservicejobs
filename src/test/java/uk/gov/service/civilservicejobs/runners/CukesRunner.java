@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = "uk/gov/service/civilservicejobs/stepDefinitions",
         dryRun = false,
-        tags = "@wip"
+        tags = "@regression"
 )
 
 public class CukesRunner {
