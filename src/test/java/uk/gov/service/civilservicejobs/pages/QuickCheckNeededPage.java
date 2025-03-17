@@ -18,10 +18,9 @@ public class QuickCheckNeededPage {
     @FindBy(xpath = "//*[@id=\"captcha-form\"]/button")
     public WebElement Continue;
 
-    public void clickAndContinueCaptcha() throws InterruptedException {
+    public void clickAndContinueCaptcha(){
         altchaCheckbox.click();
         BrowserUtils.waitFor(5);
         Continue.click();
     }
-
 }

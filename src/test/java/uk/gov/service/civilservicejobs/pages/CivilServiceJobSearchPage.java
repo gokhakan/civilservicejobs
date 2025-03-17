@@ -5,6 +5,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import uk.gov.service.civilservicejobs.utilities.Driver;
 
+import static uk.gov.service.civilservicejobs.utilities.Commons.safeClick;
+
 public class CivilServiceJobSearchPage {
     public CivilServiceJobSearchPage() {
         PageFactory.initElements(Driver.get(), this);
@@ -23,6 +25,6 @@ public class CivilServiceJobSearchPage {
     public WebElement submitSearch;
 
     public void acceptAllCookies() {
-        acceptAllCookiesButton.click();
+        safeClick(acceptAllCookiesButton);
     }
 }

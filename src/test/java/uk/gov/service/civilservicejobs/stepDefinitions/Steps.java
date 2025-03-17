@@ -6,11 +6,12 @@ import io.cucumber.java.en.When;
 import uk.gov.service.civilservicejobs.pages.CivilServiceJobSearchPage;
 import uk.gov.service.civilservicejobs.pages.QuickCheckNeededPage;
 import uk.gov.service.civilservicejobs.pages.SearchResultsPage;
-import uk.gov.service.civilservicejobs.utilities.BrowserUtils;
 import uk.gov.service.civilservicejobs.utilities.ConfigurationReader;
 import uk.gov.service.civilservicejobs.utilities.Driver;
 
 import static org.junit.Assert.assertEquals;
+import static uk.gov.service.civilservicejobs.utilities.Commons.safeClick;
+import static uk.gov.service.civilservicejobs.utilities.Commons.safeSendKeys;
 
 public class Steps {
     @Given("user is on search page")
@@ -23,10 +24,11 @@ public class Steps {
 
     @When("user searches for {string} in {string}")
     public void user_searches_for_in(String what, String where) {
-        new CivilServiceJobSearchPage().what.sendKeys(what);
-        new CivilServiceJobSearchPage().where.sendKeys(where);
-        new CivilServiceJobSearchPage().submitSearch.click();
-        BrowserUtils.waitForPageToLoad(4);
+        CivilServiceJobSearchPage searchPage = new CivilServiceJobSearchPage();
+
+        safeSendKeys(searchPage.what, what);
+        safeSendKeys(searchPage.where, where);
+        safeClick(searchPage.submitSearch);
     }
 
     @Then("{string} search results should be displayed")
@@ -36,16 +38,12 @@ public class Steps {
 
     @When("user filters {string}")
     public void user_filters(String filter) {
-        new SearchResultsPage().department.click();
-        BrowserUtils.waitForPageToLoad(5);
-        new SearchResultsPage().department.click();
-        BrowserUtils.waitForPageToLoad(5);
-        new SearchResultsPage().department.click();
-        new SearchResultsPage().searchBox.click();
-        BrowserUtils.waitForPageToLoad(5);
-        new SearchResultsPage().searchBox.sendKeys(filter);
-        BrowserUtils.waitForPageToLoad(5);
-        new SearchResultsPage().medicines.click();
-        new SearchResultsPage().updateResult.click();
+        SearchResultsPage searchResultsPage = new SearchResultsPage();
+
+        safeClick(searchResultsPage.department);
+        safeClick(searchResultsPage.searchBox);
+        safeSendKeys(searchResultsPage.searchBox, filter);
+        safeClick(searchResultsPage.medicines);
+        safeClick(searchResultsPage.updateResult);
     }
 }
