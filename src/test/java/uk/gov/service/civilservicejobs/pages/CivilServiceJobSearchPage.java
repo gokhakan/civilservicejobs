@@ -24,6 +24,9 @@ public class CivilServiceJobSearchPage {
     @FindBy(id = "submitSearch")
     public WebElement submitSearch;
 
+    @FindBy(xpath = "//a[contains(@href, 'civil-service-careers.gov.uk') and @rel='external' and @target='_blank']")
+    public WebElement careersAvailableInTheCivilService;
+
     public void acceptAllCookies() {
         safeClick(acceptAllCookiesButton);
     }
