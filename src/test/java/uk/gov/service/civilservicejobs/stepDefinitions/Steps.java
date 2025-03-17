@@ -26,7 +26,7 @@ public class Steps {
     public void user_is_on_search_page() {
         Driver.get().get(ConfigurationReader.get("url"));
         new QuickCheckNeededPage().clickAndContinueCaptcha();
-        assertEquals("Civil Service job search - Civil Service Jobs - GOV.UK", Driver.get().getTitle());
+        assertEquals("Quick Check Needed", Driver.get().getTitle());
         new CivilServiceJobSearchPage().acceptAllCookies();
     }
 
