@@ -15,10 +15,10 @@ import static uk.gov.service.civilservicejobs.utilities.Commons.safeSendKeys;
 
 public class Steps {
     @Given("user is on search page")
-    public void user_is_on_search_page() throws InterruptedException {
+    public void user_is_on_search_page() {
         Driver.get().get(ConfigurationReader.get("url"));
         new QuickCheckNeededPage().clickAndContinueCaptcha();
-        assertEquals( "Civil Service job search - Civil Service Jobs - GOV.UK", Driver.get().getTitle());
+        assertEquals("Civil Service job search - Civil Service Jobs - GOV.UK", Driver.get().getTitle());
         new CivilServiceJobSearchPage().acceptAllCookies();
     }
 
